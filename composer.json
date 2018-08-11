@@ -1,0 +1,23 @@
+{
+    "require": {
+        "php": ">=5.6",
+        "johnpbloch/wordpress-core-installer": "*",
+        "johnpbloch/wordpress": "*"
+    },
+    "config": {
+        "vendor-dir": "webroot/vendor"
+    },
+    "extra": {
+        "installer-paths": {
+            "webroot/plugins/{$name}/": ["type:wordpress-plugin"],
+            "webroot/themes/{$name}/": ["type:wordpress-theme"]
+        },
+        "wordpress-install-dir": "webroot/cms"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    ]
+}
