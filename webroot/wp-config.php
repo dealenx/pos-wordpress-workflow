@@ -9,7 +9,7 @@ if (
     !isset($_ENV['MYSQL_PASSWORD']) ||
     !isset($_ENV['MYSQL_HOST']) ||
     !isset($_ENV['FORCE_SSL']) ||
-    !isset($_ENV['ENABLE_CACHING']) ||
+    !isset($_ENV['ENABLE_EXTERNAL_CACHING']) ||
     !isset($_ENV['DEBUG_MODE']) ||
     !isset($_ENV['DEBUG_SHOW_ERRORS'])
 ) throw new Exception('invalid or missing environment config');
@@ -36,6 +36,12 @@ define('WP_CONTENT_URL', WP_HOME . '/wp-content');
 
 // WPMU
 // define('WP_ALLOW_MULTISITE', true);
+
+// force language
+// define('WPLANG', 'de_DE');
+
+// default theme
+// define('WP_DEFAULT_THEME', 'theme');
 
 // debugging
 if ($_ENV['DEBUG_MODE']) {
@@ -96,15 +102,16 @@ define('DB_COLLATE', '');
 $table_prefix  = 'wp_';
 
 // FTP settings
-// define('FTP_HOST', '');
-// define('FTP_USER', '');
-// define('FTP_PASS', '');
-// define('FTP_SSL', false);
-//define('FTP_BASE', '/path/to/wordpress/');
-//define('FTP_CONTENT_DIR', '/path/to/wordpress/wp-content/');
-//define('FTP_PLUGIN_DIR ', '/path/to/wordpress/wp-content/plugins/');
-//define('FTP_PUBKEY', '/home/username/.ssh/id_rsa.pub');
-//define('FTP_PRIKEY', '/home/username/.ssh/id_rsa');
+if (isset($_ENV['FTP_HOST'])) define('FTP_HOST', $_ENV['FTP_HOST']);
+if (isset($_ENV['FTP_USER'])) define('FTP_USER', $_ENV['FTP_USER']);
+if (isset($_ENV['FTP_PASSWORD'])) define('FTP_PASS', $_ENV['FTP_PASSWORD']);
+if (isset($_ENV['FTP_USE_SSL'])) define('FTP_SSL', !!$_ENV['FTP_USE_SSL']);
+if (isset($_ENV['FS_METHOD'])) define('FS_METHOD', $_ENV['FS_METHOD']);
+if (isset($_ENV['FTP_WORDPRESS_PATH'])) define('FTP_BASE', $_ENV['FTP_WORDPRESS_PATH']);
+if (isset($_ENV['FTP_WPCONTENT_PATH'])) define('FTP_CONTENT_DIR', $_ENV['FTP_WPCONTENT_PATH']);
+if (isset($_ENV['FTP_PLUGINS_PATH'])) define('FTP_PLUGIN_DIR ', $_ENV['FTP_PLUGINS_PATH']);
+if (isset($_ENV['FTP_PUBLIC_KEY_FILE_PATH'])) define('FTP_PUBKEY', $_ENV['FTP_PUBLIC_KEY_FILE_PATH']);
+if (isset($_ENV['FTP_PRIVATE_KEY_FILE_PATH'])) define('FTP_PRIKEY', $_ENV['FTP_PRIVATE_KEY_FILE_PATH']);
 
 /* That's all, stop editing! Happy blogging. */
 

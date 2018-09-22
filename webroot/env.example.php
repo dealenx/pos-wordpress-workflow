@@ -1,13 +1,28 @@
 <?php
 
-$_ENV['ENVIRONMENT'] = 'local'; // local, staging, production
+// Environment-specific settings only! Put other settings directly in wp-config.php.
 
-$_ENV['MYSQL_DATABASE'] = 'your_database_here';
-$_ENV['MYSQL_USER'] = 'your_username_here';
-$_ENV['MYSQL_PASSWORD'] = 'your_password_here';
-$_ENV['MYSQL_HOST'] = 'localhost';
+// general settings
+if (!isset($_ENV['ENVIRONMENT']))                   $_ENV['ENVIRONMENT'] = 'local'; // local, staging, production
+if (!isset($_ENV['FORCE_SSL']))                     $_ENV['FORCE_SSL'] = false; // enable on production!
+if (!isset($_ENV['ENABLE_EXTERNAL_CACHING']))       $_ENV['ENABLE_EXTERNAL_CACHING'] = false; // activate when using a caching plugin
+if (!isset($_ENV['DEBUG_MODE']))                    $_ENV['DEBUG_MODE'] = false; // disable on production
+if (!isset($_ENV['DEBUG_SHOW_ERRORS']))             $_ENV['DEBUG_SHOW_ERRORS'] = false;
 
-$_ENV['FORCE_SSL'] = 'https'; // http, https
-$_ENV['ENABLE_CACHING'] = true;
-$_ENV['DEBUG_MODE'] = false;
-$_ENV['DEBUG_SHOW_ERRORS'] = false;
+// MySQL
+if (!isset($_ENV['MYSQL_DATABASE']))                $_ENV['MYSQL_DATABASE'] = 'your_database_here';
+if (!isset($_ENV['MYSQL_USER']))                    $_ENV['MYSQL_USER'] = 'your_username_here';
+if (!isset($_ENV['MYSQL_PASSWORD']))                $_ENV['MYSQL_PASSWORD'] = 'your_password_here';
+if (!isset($_ENV['MYSQL_HOST']))                    $_ENV['MYSQL_HOST'] = 'localhost';
+
+// FTP
+if (!isset($_ENV['FTP_HOST']))                      $_ENV['FTP_HOST'] = '';
+if (!isset($_ENV['FTP_USER']))                      $_ENV['FTP_USER'] = '';
+if (!isset($_ENV['FTP_PASSWORD']))                  $_ENV['FTP_PASSWORD'] = '';
+if (!isset($_ENV['FTP_USE_SSL']))                   $_ENV['FTP_USE_SSL'] = true;
+if (!isset($_ENV['FS_METHOD']))                     $_ENV['FS_METHOD'] = 'direct';
+if (!isset($_ENV['FTP_WORDPRESS_PATH']))            $_ENV['FTP_WORDPRESS_PATH'] = '';
+if (!isset($_ENV['FTP_WPCONTENT_PATH']))            $_ENV['FTP_WPCONTENT_PATH'] = '';
+if (!isset($_ENV['FTP_PLUGINS_PATH']))              $_ENV['FTP_PLUGINS_PATH'] = '';
+if (!isset($_ENV['FTP_PUBLIC_KEY_FILE_PATH']))      $_ENV['FTP_PUBLIC_KEY_FILE_PATH'] = '';
+if (!isset($_ENV['FTP_PRIVATE_KEY_FILE_PATH']))     $_ENV['FTP_PRIVATE_KEY_FILE_PATH'] = '';
