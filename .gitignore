@@ -1,5 +1,6 @@
 .DS_Store
 composer.lock
+.env
 
 webroot/cms
 webroot/env.php

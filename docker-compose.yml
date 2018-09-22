@@ -1,0 +1,63 @@
+version: "3"
+
+services:
+    PROJECT_SLUG_REPLACEMENT_php:
+        container_name: ${PROJECT_SLUG}_php
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+        expose:
+            - 80
+            - 443
+        volumes:
+            - ./${WEBROOT_SUBPATH}:/var/www/html/
+            # - ./docker/php/ini-config/:/tmp/php/ini-config/
+        depends_on:
+            - ${PROJECT_SLUG}_mysql
+        environment:
+            VIRTUAL_HOST: ${VIRTUAL_HOST_PHP}
+            MYSQL_HOST: ${PROJECT_SLUG}_mysql
+            MYSQL_DATABASE: ${PROJECT_SLUG}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            # XDEBUG_CONFIG: remote_host=127.0.0.1 remote_port=9000
+        restart: always
+        networks:
+            - pos-docker-proxy_proxy
+
+    PROJECT_SLUG_REPLACEMENT_mysql:
+        container_name: ${PROJECT_SLUG}_mysql
+        image: mysql:5.6.37
+        # ports:
+        #     - ${MYSQL_PORT}:3306
+        expose:
+            - 3306
+        volumes:
+            - ./docker/mysql/raw-data/:/var/lib/mysql/
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DATABASE: ${PROJECT_SLUG}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        restart: always
+        networks:
+            - pos-docker-proxy_proxy
+
+    PROJECT_SLUG_REPLACEMENT_phpmyadmin:
+        container_name: ${PROJECT_SLUG}_phpmyadmin
+        image: phpmyadmin/phpmyadmin:4.7
+        expose:
+            - 80
+        depends_on:
+            - ${PROJECT_SLUG}_mysql
+        environment:
+            VIRTUAL_HOST: db.${VIRTUAL_HOST_PHP}
+            PMA_HOST: ${PROJECT_SLUG}_mysql
+            PMA_USER: ${MYSQL_USER}
+            PMA_PASSWORD: ${MYSQL_PASSWORD}
+        networks:
+            - pos-docker-proxy_proxy
+
+networks:
+    pos-docker-proxy_proxy:
+        external: true
