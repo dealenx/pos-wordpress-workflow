@@ -1,7 +1,7 @@
 # ATTENTION: If you want to alter this file, be sure to rebuild the container afterwards! ($ docker-compose up --build)
 
 # use the desired PHP version
-FROM php:7-apache
+FROM php:7.1-apache
 # FROM php:5.6.37-apache
 
 # use this if you want to use environment specific .htaccess files
@@ -33,10 +33,10 @@ RUN apt-get update \
 		mcrypt \
 		opcache \
 	&& pecl install \
-		redis-3.1.0 \
+		# redis-3.1.0 \
 		xdebug-2.5.0 \
 	&& docker-php-ext-enable \
-		redis \
+		# redis \
 		xdebug \
 	&& a2enmod \
 		rewrite \
