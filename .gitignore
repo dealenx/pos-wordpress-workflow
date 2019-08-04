@@ -2,20 +2,20 @@
 composer.lock
 .env
 
-webroot/cms
-webroot/env.php
-webroot/wp-content/advanced-cache.php
-webroot/wp-content/backup-db/
-webroot/wp-content/backups/
-webroot/wp-content/blogs.dir/
-webroot/wp-content/cache/
-webroot/wp-content/upgrade/
-webroot/wp-content/uploads/
-# webroot/wp-content/mu-plugins/
-webroot/wp-content/index.php
-webroot/wp-content/themes/twenty*
-# webroot/wp-content/themes/index.php
-webroot/wp-content/wp-cache-config.php
-# webroot/wp-content/plugins/index.php
-webroot/wp-content/plugins/hello.php
-# webroot/wp-content/plugins/akismet
+cms
+env.php
+wp-content/advanced-cache.php
+wp-content/backup-db/
+wp-content/backups/
+wp-content/blogs.dir/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/uploads/
+# wp-content/mu-plugins/
+wp-content/index.php
+wp-content/themes/twenty*
+# wp-content/themes/index.php
+wp-content/wp-cache-config.php
+# wp-content/plugins/index.php
+wp-content/plugins/hello.php
+# wp-content/plugins/akismet
